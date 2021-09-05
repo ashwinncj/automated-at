@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated AT Generation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="js/auto-at.js"></script>
+    <style>
+        .i-see-test {
+            border: 1px solid gray;
+            padding: 10px;
+            margin: 5px;
+            width: 700px;
+        }
+        
+        #at-field-additions {
+            border: 1px solid gray;
+            padding: 10px;
+            margin: 5px;
+            width: 500px;
+            position: fixed;
+            right: 10px;
+            top: 10px;
+        }
+
+        .i-see-test .target-url, .i-see-test .at-group {
+            
+        }
+
+        .i-see-test > div {
+            padding:2px;
+            width: 49%;
+            display: inline-block;
+        }
+
+        #at-field-additions > div {
+            padding: 5px;
+        }
+
+        .expect input {
+            text-transform: capitalize;;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Automated AT Generation Platform</h3>
+    <div id="at-generator-container">
+
+    </div>
+    <div id="at-field-additions">
+        <div>
+            <span>Where are you checking?(URL) </span><input type="text" name="url" id="target-url"><br>
+        </div>
+        <div>
+            <span>Any specific group? </span><input type="text" name="group" id="at-group"><br>
+        </div>
+        <div>
+            <span>Type of test: </span><button id="i-want-to-see">I want to see this</button>
+        </div>
+    </div>
+
+    <div class="at-download-options">
+        <span>File Name:</span><input type="text" id="at-name"><span>.php</span>
+        <button onclick="save()">Download AT</button>
+    </div>
+</body>
+
+</html>
