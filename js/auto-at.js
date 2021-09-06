@@ -49,7 +49,7 @@ function readExpectToSeeTests() {
         let targetUrl = $( this.querySelector('.target-url input') ).val().trim();
         console.log('Stage2' + targetUrl );
         let atGroup = $( this.querySelector('.at-group input') ).val().trim();
-        let expect = $( this.querySelector('.expect input') ).val().trim();
+        let expect = convertToPascalCase ( $( this.querySelector('.expect input') ).val().trim() );
         let see = $( this.querySelector('.see input') ).val().trim();
 
         if( expect == '' ) {
@@ -68,7 +68,7 @@ function readExpectToSeeTests() {
         '*\n' +
         '* @group ' + atGroup +'\n' +
         '*/\n' +
-        'function test'+ removeSpaces( expect ) + '( AcceptanceTester $I ) {\n' +
+        'public function test'+ removeSpaces( expect ) + '( AcceptanceTester $I ) {\n' +
         getUrlRedirectSyntax( targetUrl ) +
         '   $I->see( \'' + see + '\' );\n' +
         '}\n' +
@@ -141,4 +141,10 @@ function toTitleCase(str) {
         return '   $I->amOnPage( \''+ redirect +'\' );\n';
       }
       return '';
+  }
+
+  function convertToPascalCase( data ) {
+    data = data.replace(/(\w)(\w*)/g,
+    function(g0,g1,g2){return g1.toUpperCase() + g2.toLowerCase();});
+    return data;
   }
