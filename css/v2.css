@@ -7,8 +7,21 @@
 .at-drop-bay {
     min-height: 50px;
     background-color: aliceblue;
+    padding: 20px;
 }
 
 #at-tests-container {
-    width: 500px;
+    width: 1000px;
+}
+
+.at-see {
+    border: 1px solid;
+    padding: 10px;
+}
+
+.expect, .see {
+    display: inline-block;
+}
+.expect input{
+    text-transform: capitalize;
 }

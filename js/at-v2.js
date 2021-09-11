@@ -7,11 +7,10 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function atDrop(ev) {
+function atDrop( ev, el ) {
     ev.preventDefault();
-    console.log('AT Drop init');
-    var data = ev.dataTransfer.getData("text");
-    ev.target.append( data );
+    let data = ev.dataTransfer.getData("text");
+    el.appendChild( getAtMarkup( data ) );
 }
 
 function addATToList() {
@@ -60,16 +59,30 @@ function addATToList() {
     $('#at-tests-container').append(atSection);
 
     // Apped drop controls to drop-bay.
-    $( '#' + atId + '-drop-bay' ).attr( 'ondrop', 'atDrop( event )' );
-    $( '#' + atId + '-drop-bay' ).attr( 'ondragover', 'allowDrop( event )' );
+    $( '#' + atId + '-drop-bay' ).attr( 'ondrop', 'atDrop( event, this )' );
+    $( '#' + atId + '-drop-bay' ).attr( 'ondragover', 'allowDrop( event, this )' );
 }   
 
-function seeAT( ev ) {
-    let seeAtSection = document.createElement('div');
-    
-    ev.dataTransfer.setData("text", 'Stage5');
+function drag( ev ) {
+    ev.dataTransfer.setData("text", ev.target.id );
 }
 
 $(document).on('click', '.at-remove-btn', function() {
     $(this).parent().remove();
 });
+
+function getAtMarkup( markup = '' ) {
+    if( 'seeAtMarkup' ) {
+        return seeAtMarkup();
+    }
+}
+
+
+function seeAtMarkup() {
+    let seeAtSection = document.createElement('div');
+    seeAtSection.className = 'at-see';
+    seeAtSection.setAttribute( 'data-at-type', 'see' );
+    seeAtSection.setAttribute( 'draggable', 'false' );
+    seeAtSection.innerHTML = '<div class="expect" draggable="false"><span>What are you expecting? </span><input type="text"></div><div class="see" draggable="false"><span>What to look for? <input type="text"></div>';
+    return seeAtSection;
+}
