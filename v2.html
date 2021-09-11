@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="js/auto-at.js"></script>
+    <script src="js/at-v2.js"></script>
+    <title>Automated AT Generation v2</title><link rel="stylesheet" href="css/v2.css">
+</head>
+<body>
+    <div id="at-types-container">
+        <div id="at-function-add">
+            <span>Where are you checking?(URL) </span><input type="text" name="at-url" id="at-url"><br>
+            <span>Any specific group? </span><input type="text" name="at-group" id="at-group"><br>
+            <button onclick="addATToList()">Add Test</button>
+        </div>
+        <div id="at-draggable-types">
+            <button draggable="true" ondragstart="seeAT(event)">I want to see</button>
+        </div>
+    </div>
+    <div id="at-tests-container"></div>
+</body>
+</html>

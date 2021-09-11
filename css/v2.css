@@ -1,0 +1,14 @@
+#at-types-container {
+    position:fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.at-drop-bay {
+    min-height: 50px;
+    background-color: aliceblue;
+}
+
+#at-tests-container {
+    width: 500px;
+}
