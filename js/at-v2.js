@@ -55,7 +55,7 @@ function addATToList() {
     let br = document.createElement('br');
 
     // Append to the list.
-    atSection.append( atUrlSection, atGroupSection, atRemoveBtn, dropBaySection );
+    atSection.append( atGroupSection, atRemoveBtn, dropBaySection );
     $('#at-tests-container').append(atSection);
 
     // Apped drop controls to drop-bay.
@@ -72,8 +72,14 @@ $(document).on('click', '.at-remove-btn', function() {
 });
 
 function getAtMarkup( markup = '' ) {
-    if( 'seeAtMarkup' ) {
+    if( 'seeAtMarkup' == markup ) {
         return seeAtMarkup();
+    }
+    if( 'clickAtMarkup' == markup ) {
+        return clickAtMarkup();
+    }
+    if( 'onPageAtMarkup' == markup ) {
+        return onPageAtMarkup();
     }
 }
 
@@ -82,7 +88,22 @@ function seeAtMarkup() {
     let seeAtSection = document.createElement('div');
     seeAtSection.className = 'at-see';
     seeAtSection.setAttribute( 'data-at-type', 'see' );
-    seeAtSection.setAttribute( 'draggable', 'false' );
-    seeAtSection.innerHTML = '<div class="expect" draggable="false"><span>What are you expecting? </span><input type="text"></div><div class="see" draggable="false"><span>What to look for? <input type="text"></div>';
+    seeAtSection.innerHTML = '<div class="expect"><span>What are you expecting? </span><input type="text"></div><div class="see"><span>What to look for? <input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
     return seeAtSection;
+}
+
+function clickAtMarkup() {
+    let clickAtSection = document.createElement('div');
+    clickAtSection.className = 'at-click';
+    clickAtSection.setAttribute( 'data-at-type', 'click' );
+    clickAtSection.innerHTML = '<div class="click"><span>Where to click? </span><input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
+    return clickAtSection;
+}
+
+function onPageAtMarkup() {
+    let onPageAtMarkup = document.createElement('div');
+    onPageAtMarkup.className = 'at-page';
+    onPageAtMarkup.setAttribute( 'data-at-type', 'page' );
+    onPageAtMarkup.innerHTML = '<div class="page"><span>Target URL? </span><input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
+    return onPageAtMarkup;
 }

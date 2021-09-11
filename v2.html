@@ -12,12 +12,15 @@
 <body>
     <div id="at-types-container">
         <div id="at-function-add">
-            <span>Where are you checking?(URL) </span><input type="text" name="at-url" id="at-url"><br>
+            <!-- <span>Where are you checking?(URL) </span><input type="text" name="at-url" id="at-url"><br> -->
             <span>Any specific group? </span><input type="text" name="at-group" id="at-group"><br>
-            <button onclick="addATToList()">Add Test</button>
+            <button onclick="addATToList()">Add Blank Test</button>
         </div>
         <div id="at-draggable-types">
-            <button id="seeAtMarkup" draggable="true" ondragstart="drag(event)">I want to see</button>
+            <span>Drag any type of test below to individual ATs -</span><br>
+            <button id="onPageAtMarkup" draggable="true" ondragstart="drag(event)">I am on Page</button><br>
+            <button id="seeAtMarkup" draggable="true" ondragstart="drag(event)">I want to see</button><br>
+            <button id="clickAtMarkup" draggable="true" ondragstart="drag(event)">Click</button><br>
         </div>
     </div>
     <div id="at-tests-container"></div>

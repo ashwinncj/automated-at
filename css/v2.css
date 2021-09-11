@@ -6,7 +6,7 @@
 
 .at-drop-bay {
     min-height: 50px;
-    background-color: aliceblue;
+    background-color: #f9f9f9;
     padding: 20px;
 }
 
@@ -14,14 +14,36 @@
     width: 1000px;
 }
 
-.at-see {
+.at-see, .at-click, .at-page {
     border: 1px solid;
+    border-style: dotted;
+    padding: 5px;
+}
+
+.expect, .see, .single-at-url, .single-at-group, .click, .page {
+    display: inline-block;
+    padding: 5px;
+}
+
+.expect input{
+    text-transform: capitalize;
+}
+
+.at-single {
+    background-color: #c4cbcc;
+    padding: 5px;
+    margin: 10px 5px;
+}
+
+.x-btn {
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+#at-function-add, #at-draggable-types {
     padding: 10px;
 }
 
-.expect, .see {
-    display: inline-block;
-}
-.expect input{
-    text-transform: capitalize;
+#at-draggable-types button {
+    margin: 2px;
 }
