@@ -20,12 +20,12 @@
     padding: 5px;
 }
 
-.expect, .see, .single-at-url, .single-at-group, .click, .page {
+.expect, .see, .single-at-url, .single-at-group, .click, .page, .single-at-desc {
     display: inline-block;
     padding: 5px;
 }
 
-.expect input{
+.expect input, .single-at-desc input, #at-desc{
     text-transform: capitalize;
 }
 
