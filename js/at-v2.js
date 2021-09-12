@@ -6,7 +6,8 @@
  */
 $(document).ready(function() {
     console.log( 'Automated AT V2 loaded.' );
-
+    let atClass = 'at' + new Date().getTime();
+    $('#at-class-name').val( atClass );
 });
 
 function allowDrop(ev) {
@@ -49,7 +50,7 @@ function addATToList() {
     let atDescSection = document.createElement('div');
     let atDesc = document.createElement('input');
     atDescSection.className = 'single-at-desc';
-    atDesc.value = $('#at-desc').val();
+    atDesc.value = getAtDescription();
     let atDescLabel = document.createElement('span');
     atDescLabel.innerHTML = 'AT Description: ';
     atDescSection.append( atDescLabel, atDesc );
@@ -76,6 +77,10 @@ function addATToList() {
     // Apped drop controls to drop-bay.
     $( '#' + atId + '-drop-bay' ).attr( 'ondrop', 'atDrop( event, this )' );
     $( '#' + atId + '-drop-bay' ).attr( 'ondragover', 'allowDrop( event, this )' );
+
+    // Remove AT desc and group.
+    $('#at-desc').val('');
+    $('#at-group').val('');
 }   
 
 function drag( ev ) {
@@ -85,4 +90,14 @@ function drag( ev ) {
 $(document).on('click', '.at-remove-btn', function() {
     $(this).parent().remove();
 });
+
+function getAtDescription() {
+    let atDesc = $('#at-desc').val();
+    if( '' == atDesc ) {
+        alert( 'AT Test Descritpion NOT Provided!\nPlease provide a description about test.' );
+        throw new Error(); 
+    }
+    return atDesc;
+}
+
 

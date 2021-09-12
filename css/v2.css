@@ -47,3 +47,8 @@
 #at-draggable-types button {
     margin: 2px;
 }
+
+#at-class-name {
+    text-align:right;
+    text-transform: capitalize;
+}
