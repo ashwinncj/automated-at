@@ -14,7 +14,7 @@
     width: 1000px;
 }
 
-.at-see, .at-click, .at-page, .see-element {
+.at-see, .at-click, .at-page, .at-see-element {
     border: 1px solid;
     border-style: dotted;
     padding: 5px;
