@@ -86,44 +86,6 @@ $(document).on('click', '.at-remove-btn', function() {
     $(this).parent().remove();
 });
 
-function getAtMarkup( markup = '' ) {
-    switch( markup ) {
-        case 'seeAtMarkup':
-            return seeAtMarkup();      
-        case 'clickAtMarkup':
-            return clickAtMarkup();
-        case 'onPageAtMarkup':
-            return onPageAtMarkup();
-        case 'seeElementAtMarkup':
-            return seeElementAtMarkup();
-    }
-}
-
-
-function seeAtMarkup() {
-    let seeAtSection = document.createElement('div');
-    seeAtSection.className = 'at-see';
-    seeAtSection.setAttribute( 'data-at-type', 'see' );
-    seeAtSection.innerHTML = '<div class="see">What to look for? <input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
-    return seeAtSection;
-}
-
-function clickAtMarkup() {
-    let clickAtSection = document.createElement('div');
-    clickAtSection.className = 'at-click';
-    clickAtSection.setAttribute( 'data-at-type', 'click' );
-    clickAtSection.innerHTML = '<div class="click"><span>Where to click? </span><input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
-    return clickAtSection;
-}
-
-function onPageAtMarkup() {
-    let onPageAtMarkup = document.createElement('div');
-    onPageAtMarkup.className = 'at-page';
-    onPageAtMarkup.setAttribute( 'data-at-type', 'page' );
-    onPageAtMarkup.innerHTML = '<div class="page"><span>Target URL? </span><input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
-    return onPageAtMarkup;
-}
-
 $(document).on('click', '#at-download', function() {
     let data = '';
     data += extractAts();
@@ -139,52 +101,6 @@ function extractAts() {
         data += getSectionEnding();
     });
     return data;
-}
-
-function extractAtsFromDropBay( dropBay ) {
-    let droppedElements = $(dropBay).children('.at-drop-bay').children('div');
-    let ats = '';
-    $(droppedElements).each( function() {
-        let atType = $(this).data('at-type');
-        switch( atType ) {
-            case 'click':
-                ats += extractClickAt( this );break;
-            case 'page':
-                ats += extractPageAt( this );break;
-            case 'see':
-                ats += extractSeeAt( this );break;
-            case 'see-element':
-                ats += extractSeeElementAt( this );break;
-        }
-    });
-    return ats;
-}
-
-function extractClickAt( el ) {
-    let data = $(el).children('.click').children('input').val();
-    if ( '' == data ) {
-        return '';
-    }
-    let at = '\t\t$I->click( \''+ data +'\' );\n';
-    return at;
-}
-
-function extractPageAt( el ) {
-    let data = $(el).children('.page').children('input').val();
-    if ( '' == data ) {
-        return '';
-    }
-    let at = '\t\t$I->amOnPage( \''+ getUrlPath( data ) +'\' );\n';
-    return at;
-}
-
-function extractSeeAt( el ) {
-    let data = $(el).children('.see').children('input').val();
-    if ( '' == data ) {
-        return '';
-    }
-    let at = '\t\t$I->see( \''+ data +'\' );\n';
-    return at;
 }
 
 function extractAtSectionName( el ) {
@@ -203,21 +119,4 @@ function extractAtGroups( el ) {
     output += '\t* @group ' + group + '\n';
     output += '\t*/\n';
     return output;
-}
-
-function seeElementAtMarkup() {
-    let seeAtElementSection = document.createElement('div');
-    seeAtElementSection.className = 'at-see-element';
-    seeAtElementSection.setAttribute( 'data-at-type', 'see-element' );
-    seeAtElementSection.innerHTML = '<div class="see-element">Element selector: <input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
-    return seeAtElementSection;
-}
-
-function extractSeeElementAt( el ) {
-    let data = $(el).children('.see-element').children('input').val();
-    if ( '' == data ) {
-        return '';
-    }
-    let at = '\t\t$I->seeElement( \''+ data +'\' );\n';
-    return at;
 }
