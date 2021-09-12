@@ -1,3 +1,9 @@
+/**
+ * Add the type of test.
+ * Define the markup.
+ * Add a check for the markup in the extractAtFromBay
+ * 
+ */
 $(document).ready(function() {
     console.log( 'Automated AT V2 loaded.' );
 
@@ -81,14 +87,15 @@ $(document).on('click', '.at-remove-btn', function() {
 });
 
 function getAtMarkup( markup = '' ) {
-    if( 'seeAtMarkup' == markup ) {
-        return seeAtMarkup();
-    }
-    if( 'clickAtMarkup' == markup ) {
-        return clickAtMarkup();
-    }
-    if( 'onPageAtMarkup' == markup ) {
-        return onPageAtMarkup();
+    switch( markup ) {
+        case 'seeAtMarkup':
+            return seeAtMarkup();      
+        case 'clickAtMarkup':
+            return clickAtMarkup();
+        case 'onPageAtMarkup':
+            return onPageAtMarkup();
+        case 'seeElementAtMarkup':
+            return seeElementAtMarkup();
     }
 }
 
@@ -97,7 +104,7 @@ function seeAtMarkup() {
     let seeAtSection = document.createElement('div');
     seeAtSection.className = 'at-see';
     seeAtSection.setAttribute( 'data-at-type', 'see' );
-    seeAtSection.innerHTML = '<div class="expect"><span>What are you expecting? </span><input type="text"></div><div class="see"><span>What to look for? <input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
+    seeAtSection.innerHTML = '<div class="see">What to look for? <input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
     return seeAtSection;
 }
 
@@ -139,11 +146,15 @@ function extractAtsFromDropBay( dropBay ) {
     let ats = '';
     $(droppedElements).each( function() {
         let atType = $(this).data('at-type');
-        if( 'click' == atType ) {
-            ats += extractClickAt( this );
-        }
-        if( 'page' == atType ) {
-            ats += extraactPageAt( this );
+        switch( atType ) {
+            case 'click':
+                ats += extractClickAt( this );break;
+            case 'page':
+                ats += extractPageAt( this );break;
+            case 'see':
+                ats += extractSeeAt( this );break;
+            case 'see-element':
+                ats += extractSeeElementAt( this );break;
         }
     });
     return ats;
@@ -154,27 +165,59 @@ function extractClickAt( el ) {
     if ( '' == data ) {
         return '';
     }
-    let at = '$I->click(\''+ data +'\');\n';
+    let at = '\t\t$I->click( \''+ data +'\' );\n';
     return at;
 }
 
-function extraactPageAt( el ) {
+function extractPageAt( el ) {
     let data = $(el).children('.page').children('input').val();
     if ( '' == data ) {
         return '';
     }
-    let at = '$I->amOnPage(\''+ data +'\');\n';
+    let at = '\t\t$I->amOnPage( \''+ getUrlPath( data ) +'\' );\n';
+    return at;
+}
+
+function extractSeeAt( el ) {
+    let data = $(el).children('.see').children('input').val();
+    if ( '' == data ) {
+        return '';
+    }
+    let at = '\t\t$I->see( \''+ data +'\' );\n';
     return at;
 }
 
 function extractAtSectionName( el ) {
-    console.log( el );
+    let sectionName = $(el).children('.single-at-desc').children('input').val();
+    sectionName = '\tpublic function test' + removeSpaces( convertToPascalCase( sectionName ) ) + '( AcceptanceTester $I ) {\n';
+    return sectionName;
 }
 
 function getSectionEnding() {
-    return '}';
+    return '\t}\n\n';
 }
 
 function extractAtGroups( el ) {
-    return '';
+    let group = $(el).children('.single-at-group').children('input').val();
+    let output = '\t/**\n';
+    output += '\t* @group ' + group + '\n';
+    output += '\t*/\n';
+    return output;
+}
+
+function seeElementAtMarkup() {
+    let seeAtElementSection = document.createElement('div');
+    seeAtElementSection.className = 'at-see-element';
+    seeAtElementSection.setAttribute( 'data-at-type', 'see-element' );
+    seeAtElementSection.innerHTML = '<div class="see-element">Element selector: <input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
+    return seeAtElementSection;
+}
+
+function extractSeeElementAt( el ) {
+    let data = $(el).children('.see-element').children('input').val();
+    if ( '' == data ) {
+        return '';
+    }
+    let at = '\t\t$I->seeElement( \''+ data +'\' );\n';
+    return at;
 }

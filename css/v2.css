@@ -14,13 +14,13 @@
     width: 1000px;
 }
 
-.at-see, .at-click, .at-page {
+.at-see, .at-click, .at-page, .see-element {
     border: 1px solid;
     border-style: dotted;
     padding: 5px;
 }
 
-.expect, .see, .single-at-url, .single-at-group, .click, .page, .single-at-desc {
+.expect, .see, .single-at-url, .single-at-group, .click, .page, .single-at-desc, .see-element {
     display: inline-block;
     padding: 5px;
 }
