@@ -52,3 +52,13 @@
     text-align:right;
     text-transform: capitalize;
 }
+
+.dragged-over {
+    border: 3px dashed #1c84ff;
+}
+
+#at-tool-info {
+    font-family: monospace;
+    font-size: 20px;
+    text-decoration: underline;
+}

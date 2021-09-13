@@ -12,12 +12,22 @@ $(document).ready(function() {
 
 function allowDrop(ev) {
     ev.preventDefault();
+    ev.target.classList.add('dragged-over');
 }
 
 function atDrop( ev, el ) {
+    ev.target.classList.remove('dragged-over');
     ev.preventDefault();
     let data = ev.dataTransfer.getData("text");
     el.appendChild( getAtMarkup( data ) );
+}
+
+function drag( ev ) {
+    ev.dataTransfer.setData("text", ev.target.id );
+}
+
+function dragLeave( ev ) {
+    ev.target.classList.remove('dragged-over');
 }
 
 function addATToList() {
@@ -77,14 +87,11 @@ function addATToList() {
     // Apped drop controls to drop-bay.
     $( '#' + atId + '-drop-bay' ).attr( 'ondrop', 'atDrop( event, this )' );
     $( '#' + atId + '-drop-bay' ).attr( 'ondragover', 'allowDrop( event, this )' );
+    $( '#' + atId + '-drop-bay' ).attr( 'ondragleave', 'dragLeave( event, this )' );
 
     // Remove AT desc and group.
     $('#at-desc').val('');
     $('#at-group').val('');
-}   
-
-function drag( ev ) {
-    ev.dataTransfer.setData("text", ev.target.id );
 }
 
 $(document).on('click', '.at-remove-btn', function() {
