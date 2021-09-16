@@ -8,6 +8,8 @@ function getAtMarkup( markup = '' ) {
             return onPageAtMarkup();break;
         case 'seeElementAtMarkup':
             return seeElementAtMarkup();break;
+        case 'loginAtMarkup':
+            return loginAtMarkup();break;
     }
 }
 
@@ -41,4 +43,12 @@ function seeElementAtMarkup() {
     seeAtElementSection.setAttribute( 'data-at-type', 'see-element' );
     seeAtElementSection.innerHTML = '<div class="see-element">Element selector: <input type="text"></div><span class="at-remove-btn x-btn">&#x2715</span>';
     return seeAtElementSection;
+}
+
+function loginAtMarkup() {
+    let loginAtSection = document.createElement('div');
+    loginAtSection.className = 'at-login';
+    loginAtSection.setAttribute( 'data-at-type', 'login' );
+    loginAtSection.innerHTML = '<div class="see">Logging in as Admin</div><span class="at-remove-btn x-btn">&#x2715</span>';
+    return loginAtSection;
 }

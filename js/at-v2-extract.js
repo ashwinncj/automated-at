@@ -12,6 +12,8 @@ function extractAtsFromDropBay( dropBay ) {
                 ats += extractSeeAt( this );break;
             case 'see-element':
                 ats += extractSeeElementAt( this );break;
+            case 'login':
+                ats += extractLoginAt( this );break;
         }
     });
     return ats;
@@ -50,5 +52,10 @@ function extractSeeElementAt( el ) {
         return '';
     }
     let at = '\t\t$I->seeElement( \''+ data +'\' );\n';
+    return at;
+}
+
+function extractLoginAt( el ) {
+    let at = '\t\t$I->loginAsAdmin();\n';
     return at;
 }
